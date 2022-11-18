@@ -6,6 +6,7 @@ import Event from "./Components.css/Event";
 import Entry from "./Components.css/Entry";
 import "./App.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import AddNewEvent from "./Components.css/AddNewEvent";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="signin" element={<Signin />} />
             <Route path="signup" element={<Signup />} />
             <Route path="event" element={<Event />} />
+            <Route path="addnewevent" element={<AddNewEvent />} />
             <Route path="entry" element={<Entry />} />
           </Route>
         </Routes>

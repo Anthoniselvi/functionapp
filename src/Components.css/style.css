@@ -1,4 +1,6 @@
-.front_container, .signin_container, .signup_container, .event_container{
+.front_container, .signin_container, 
+.signup_container, .event_container,
+.addnewevent_container, .entry_container{
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -93,7 +95,9 @@
     gap: 20px;
 }
 .signin_input, .signin_sign_button,
-.signup_input, .signup_sign_button{
+.signup_input, .signup_sign_button,
+.addevent_input, .addevent_button,
+.entry_form_input, .entry_form_comments{
 padding: 15px;
 /* width: 100%; */
 border-radius: 30px;
@@ -102,10 +106,10 @@ outline: none;
 background-color: #f5f1ed;
 font-size: 15px;
 }
-.signin_input:active,
-.signin_input:focus,
-.signup_input:active,
-.signup_input:focus{
+.signin_input:active, .signin_input:focus,
+.signup_input:active, .signup_input:focus,
+.addevent_input:active, .addevent_input:focus,
+.entry_form_input:active, .entry_form_input:active{
     background-color: #fff3b0;
 }
 .signin_forget_para{
@@ -113,7 +117,9 @@ font-size: 15px;
     font-size: 13px;
 }
 .signin_sign_button,
-.signup_sign_button{
+.signup_sign_button,
+.addevent_button,
+.entry_button{
     background-color: #011627;
     color: #fdfffc;
     margin-top: 10px;
@@ -164,7 +170,7 @@ font-size: 15px;
     color: #d00000;
 }
 .header_container{
-    height: 10%;
+    height: 13%;
     background-color: #ff9f1c;
     margin-top: 0;
     padding: 10px;
@@ -175,17 +181,20 @@ font-size: 15px;
     color: #d00000;
 }
 .event_content{
-    height:77%;
+    height:74%;
     background-color: #fdfffc;
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
-    padding: 10px 20px;
+    padding: 20px;
     gap:20px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
-.event_container{
+.event_container, 
+.addnewevent_container,
+.entry_container{
     background-color: #ff9f1c;
 }
 .event_list{
@@ -204,3 +213,120 @@ font-size: 15px;
     flex-direction: column;
     gap: 10px;
   }
+  .event_head_name{
+    display: grid;
+    grid-template-columns: 5fr 1fr 1fr;
+  }
+  .event_icon{
+    font-size: 16px;
+    cursor: pointer;
+  }
+  .event_header,
+  .entry_header{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 13%;
+    background-color: #ff9f1c;
+  }
+  .event_header_icon{
+    font-size: 22px;
+  }
+  .addevent_content,
+  .entry_content{
+    height: 74%;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    background-color: #fdfffc;
+    padding: 20px;
+  }
+  .addevent_form{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .addevent_input_container{
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+  }
+  .addevent_label{
+    color:#f77f00;
+    font-weight: 700;
+  }
+  h1{
+    color: #c1121f;
+  }
+  .entry_content{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+  }
+  .entry_search{
+    display:flex;
+    gap: 20px;
+    border: 1px solid #b6ccfe;
+align-items: center;
+padding: 10px;
+border-radius: 20px;
+  }
+  .entry_input{
+    border: none;
+    outline: none;
+  }
+  .entry_list_container{
+      padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+  }
+  .entry_list_inner{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    border: none;
+    width: 100%;
+    border-radius: 10px;
+    background-color: #fcca46;
+  }
+  .entry_list_icon{
+    font-size: 16px;
+  }
+  .entry_form{
+     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+  }
+  .entry_form_comments {
+height: 50px;
+  }
+  .entry_button{
+    border: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 20px;
+    }
+    .select-container{
+        display: flex;
+        flex-direction: column;
+        gap:15px;
+        padding: 10px;
+    }
+    .select-container-title{
+        color: #f77f00;
+        font-weight: 600;
+    }
+    .select-type-list{
+        display: flex;
+        justify-content: space-between;
+    }
+    .select-type > label {
+        color: #f77f00;
+    }
