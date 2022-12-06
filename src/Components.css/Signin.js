@@ -1,6 +1,6 @@
 import React from "react";
 import FrontPage from "./FrontPage";
-import Event from "./Event";
+import Event from "./EventList";
 import "./style.css";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./style.css";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { BsPersonCircle } from "react-icons/bs";
@@ -7,30 +7,43 @@ import Footer from "./Footer";
 
 function AddNewEvent() {
   const navigate = useNavigate();
-  const [addevent, setAddEvent] = React.useState({
-    event: "",
-    place: "",
-    date: "",
-  });
+  const [name, setName] = useState();
+  const [place, setPlace] = useState();
+  const [date, setDate] = useState();
 
-  function addeventInput(e) {
-    const { event, place, date } = e.target;
-    setAddEvent((prevAddEvent) => {
-      return {
-        ...prevAddEvent,
-        // [name]: type === "checkbox" ? checked : value,
-      };
-    });
-  }
+  // const eventInputEl = useRef(null);
+  // const initialEventState = {
+  //   name: "",
+  //   place: "",
+  //   date: "",
+  // };
+  // const [prog, setProg] = useState(initialEventState);
+
+  // const addeventInput = (event) => {
+  //   const { name, value } = event.target;
+  //   setProg({ ...prog, [name]: value });
+  // };
 
   function moveToEvent() {
-    navigate("/Event");
+    navigate("/Events");
   }
 
-  function handleAddEventSubmit(event) {
+  const handleAddEventSubmit = (event) => {
     event.preventDefault();
-    navigate("/Event");
-  }
+    // props.addevent(event);
+    setName(name);
+    setPlace(place);
+    setDate(date);
+    navigate("/Events");
+  };
+  // const setInitialFocus = () => {
+  //   eventInputEl.current.focus();
+  // };
+
+  // useEffect(() => {
+  //   setInitialFocus();
+  // });
+
   return (
     <div className="addnewevent_container">
       <div className="event_header">
@@ -47,40 +60,43 @@ function AddNewEvent() {
             <label className="addevent_label">Event Name</label>
             <input
               className="addevent_input"
+              required
+              // ref={eventInputEl}
               type="text"
-              placeholder=""
-              onChange={addeventInput}
+              // placeholder="Event Name"
+              onChange={(e) => setName(e.target.value)}
               name="name"
-              // value={}
+              value={name}
             />
           </div>
           <div className="addevent_input_container">
             <label className="addevent_label">Event Date</label>
             <input
+              required
               className="addevent_input"
               type="date"
-              placeholder="Event Date"
-              onChange={addeventInput}
+              // placeholder="Event Date"
+              onChange={(e) => setDate(e.target.value)}
               name="date"
-              // value={formData.city}
+              value={date}
             />
           </div>
           <div className="addevent_input_container">
             <label className="addevent_label">Event Place</label>
             <input
               className="addevent_input"
+              required
               type="text"
-              placeholder=""
-              onChange={addeventInput}
+              // placeholder=""
+              onChange={(e) => setPlace(e.target.value)}
               name="place"
-              // value={formData.amount}
+              value={place}
             />
           </div>
 
-          <button className="addevent_button">Add</button>
+          <button className="addevent_button">Add New Event</button>
         </form>
       </div>
-      <Footer />
     </div>
   );
 }
