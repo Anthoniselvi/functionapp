@@ -1,6 +1,7 @@
 .front_container, .signin_container, 
 .signup_container, .event_container,
-.addnewevent_container, .entry_container{
+.addnewevent_container, .entry_container,
+.eventlist_container{
     display: flex;
     flex-direction: column;
     height: 100%;

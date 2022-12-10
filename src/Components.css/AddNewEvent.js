@@ -3,7 +3,6 @@ import "./style.css";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { BsPersonCircle } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
-import Footer from "./Footer";
 
 function AddNewEvent() {
   const navigate = useNavigate();
@@ -11,38 +10,18 @@ function AddNewEvent() {
   const [place, setPlace] = useState();
   const [date, setDate] = useState();
 
-  // const eventInputEl = useRef(null);
-  // const initialEventState = {
-  //   name: "",
-  //   place: "",
-  //   date: "",
-  // };
-  // const [prog, setProg] = useState(initialEventState);
-
-  // const addeventInput = (event) => {
-  //   const { name, value } = event.target;
-  //   setProg({ ...prog, [name]: value });
-  // };
-
   function moveToEvent() {
     navigate("/Events");
   }
 
   const handleAddEventSubmit = (event) => {
     event.preventDefault();
-    // props.addevent(event);
+
     setName(name);
     setPlace(place);
     setDate(date);
     navigate("/Events");
   };
-  // const setInitialFocus = () => {
-  //   eventInputEl.current.focus();
-  // };
-
-  // useEffect(() => {
-  //   setInitialFocus();
-  // });
 
   return (
     <div className="addnewevent_container">
@@ -61,7 +40,6 @@ function AddNewEvent() {
             <input
               className="addevent_input"
               required
-              // ref={eventInputEl}
               type="text"
               // placeholder="Event Name"
               onChange={(e) => setName(e.target.value)}

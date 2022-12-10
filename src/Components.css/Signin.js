@@ -1,6 +1,6 @@
 import React from "react";
 import FrontPage from "./FrontPage";
-import Event from "./EventList";
+import EventsForm from "./EventList";
 import "./style.css";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
@@ -15,7 +15,7 @@ function Signin() {
   }
 
   function moveToEvent() {
-    navigate("/Event");
+    navigate("/EventsForm");
   }
   return (
     <div className="signin_container">
