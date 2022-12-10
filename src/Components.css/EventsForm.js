@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./style.css";
+import Footer from "./Footer";
 import EventList from "./EventList";
 import { AiOutlineArrowLeft, AiFillEdit } from "react-icons/ai";
-import { BiSearch } from "react-icons/bi";
 import { BsPersonCircle, BsFillPersonFill } from "react-icons/bs";
 import { MdDelete } from "react-icons/md";
+import EntryForm from "./EntryForm";
+import EntryList from "./EntryList";
+import { useNavigate } from "react-router-dom";
 
 const getDatafromEvent = () => {
   const data = localStorage.getItem("eventss");
@@ -14,13 +17,17 @@ const getDatafromEvent = () => {
     return [];
   }
 };
-export default function EventsForm() {
+export default function EventsForm({ totalAmount, totalGift }) {
+  const navigate = useNavigate();
   const [eventss, setEventss] = useState(getDatafromEvent());
   const [name, setName] = useState("");
   const [place, setPlace] = useState("");
   const [date, setDate] = useState("");
   const [showList, setShowList] = useState(true);
 
+  const moveToEntryForm = () => {
+    navigate("/EntryForm");
+  };
   const handleSubmitEvent = (e) => {
     console.log();
     e.preventDefault();
@@ -50,13 +57,12 @@ export default function EventsForm() {
         <h1>Events</h1>
         <BsPersonCircle className="event_header_icon" />
       </div>
-      <div className="event-content">
+      <div className="event_content">
         {showList ? (
           <div className="event-list-container">
             {eventss.length > 0 && (
               <>
-                <div className="event-inner-box">
-                  {/* onClick={moveToEntry} */}
+                <div className="event-inner-box" onClick={moveToEntryForm}>
                   <div className="event_head_name">
                     <h4>
                       <EventList eventss={eventss} />
@@ -64,14 +70,14 @@ export default function EventsForm() {
                     <AiFillEdit className="event_icon" />
                     <MdDelete className="event_icon" />
                   </div>
-                  <table>
+                  <table className="event-table">
                     <tr>
                       <td>Amount</td>
-                      <td>Nil</td>
+                      <td>{totalAmount}</td>
                     </tr>
                     <tr>
                       <td>Things</td>
-                      <td>Nil</td>
+                      <td>{totalGift}</td>
                     </tr>
                   </table>
                 </div>
@@ -93,12 +99,18 @@ export default function EventsForm() {
             )}
 
             {eventss.length < 1 && <p>No Events found</p>}
-            <button onClick={() => setShowList(false)}>Add New Event</button>
+            <button
+              className="addevent-button"
+              onClick={() => setShowList(false)}
+            >
+              Add New Event
+            </button>
           </div>
         ) : (
-          <form onSubmit={handleSubmitEvent}>
-            <h1>Add New Event</h1>
+          <form className="event_form" onSubmit={handleSubmitEvent}>
+            <h1 className="event-title">Add New Event</h1>
             <input
+              className="event_inputs"
               type="text"
               name="name"
               required
@@ -107,6 +119,7 @@ export default function EventsForm() {
               placeholder="Event Name"
             />
             <input
+              className="event_inputs"
               type="text"
               required
               name="place"
@@ -115,6 +128,7 @@ export default function EventsForm() {
               placeholder="Place"
             />
             <input
+              className="event_inputs"
               type="date"
               required
               name="date"
@@ -122,10 +136,13 @@ export default function EventsForm() {
               value={date}
             />
             {/* <button type="submit" onClick={() => setShow(!show)}> */}
-            <button type="submit">Add Event</button>
+            <button type="submit" className="event_button">
+              Add Event
+            </button>
           </form>
         )}
       </div>
+      <Footer />
     </div>
   );
 }

@@ -187,22 +187,52 @@ font-size: 15px;
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
     padding: 20px;
-    gap:20px;
+     gap:20px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    /* align-items: center; */
+    /* justify-content: center; */
+}
+.event_form,
+.entry_form{
+  display: flex;
+  padding: 20px;
+  flex-direction: column;
+  align-items: center;
+  gap:40px;
+ 
 }
 .event_container, 
 .addnewevent_container,
 .entry_container{
     background-color: #ff9f1c;
 }
+.event_inputs,
+.entry_inputs{
+  padding: 10px;
+  border-radius: 20px;
+ border: 1px solid #b6ccfe;
+ width: 100%;
+}
+.event_button,
+.entry_button,
+.entrylist_button{
+  padding: 10px;
+  cursor: pointer;
+    background: linear-gradient(to right, #ff9f1c, #e55934);
+    border-radius: 20px;
+    border: none;
+    font-size: 20px;
+    font-weight: 600;
+}
 .event_list{
     display: flex;
     flex-direction: column;
     width: 100%;
     gap: 20px;
+}
+.event-table {
+  padding: 10px;
 }
 .event-inner-box{
     color: #343030;
@@ -221,6 +251,25 @@ font-size: 15px;
   .event_icon{
     font-size: 16px;
     cursor: pointer;
+  }
+  .event-title,
+  .entry-title{
+    font-size: 25px;
+    text-align: center;
+  }
+  .addevent-button,
+  .addentry-button{
+    margin-top: 20px;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: #fcca46;
+    color: #011627;
+    border: none;
+    cursor: pointer;
+   
   }
   .event_header,
   .entry_header{
@@ -331,3 +380,26 @@ height: 50px;
     .select-type > label {
         color: #f77f00;
     }
+    .entry-inner-box{
+      display: flex;
+      flex-direction: column;
+      align-items: center; 
+      gap:20px;
+      /* border: 1px solid red; */
+          }
+          .total-entry{
+            font-size: 20px;
+            font-weight: 600;
+            color: #e55934;
+          }
+    .entry-table > tr{
+      padding: 10px;
+      display: grid;
+ grid-template-columns: 4fr 1fr 1fr;
+ align-items: center;
+ justify-content: center;
+      border: 1px solid #b6ccfe;
+      border-radius: 10px;
+      gap: 20px;
+    }
+  
