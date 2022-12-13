@@ -1,52 +1,46 @@
 import React, { useState, useEffect } from "react";
-import "./style.css";
-import EventList from "./EventList";
-import EntryList from "./EntryList";
+import { useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Footer from "./Footer";
 import { AiOutlineArrowLeft, AiFillEdit } from "react-icons/ai";
 import { BiSearch } from "react-icons/bi";
 import { BsPersonCircle, BsFillPersonFill } from "react-icons/bs";
 import { MdDelete } from "react-icons/md";
-import { useSearchParams } from "react-router-dom";
+import { BiMenu } from "react-icons/bi";
+import { AiFillHome } from "react-icons/ai";
+import { GrAddCircle } from "react-icons/gr";
 
-const getDatafromEntry = (eventId) => {
-  const data = localStorage.getItem("entries");
+const getDatafromEvent = (eventId) => {
+  const data = localStorage.getItem("eventsList");
   if (data) {
-    return JSON.parse(data).filter((entry) => {
-      return entry.eventId === eventId;
+    return JSON.parse(data).filter((event) => {
+      return parseInt(event.id) === parseInt(eventId);
     });
   } else {
     return [];
   }
 };
-export default function EntryListNew(props) {
+
+const getDatafromEntry = (eventId) => {
+  const data = localStorage.getItem("entries");
+  console.log("from data", data);
+  if (data) {
+    return JSON.parse(data).filter((entry) => {
+      return parseInt(entry.eventId) === parseInt(eventId);
+    });
+  } else {
+    return [];
+  }
+};
+
+export default function EntriesList() {
+  const navigate = useNavigate();
   const [searchParam] = useSearchParams();
   const eventId = searchParam.get("event");
 
+  const [eventsList, setEventsList] = useState(getDatafromEvent(eventId));
   const [entries, setEntries] = useState(getDatafromEntry(eventId));
-  const [personName, setPersonName] = useState("");
-  const [city, setCity] = useState("");
-  const [amount, setAmount] = useState(0);
-  const [gift, setGift] = useState(0);
-  const [showList, setShowList] = useState(true);
 
-  const handleSubmitEvent = (e) => {
-    console.log();
-    e.preventDefault();
-    let entry = {
-      eventId: eventId,
-      personName,
-      city,
-      amount,
-      gift,
-    };
-    setEntries([...entries, entry]);
-    setPersonName("");
-    setCity("");
-    setAmount("");
-    setGift("");
-    setShowList(true);
-  };
   const totalAmount = entries
     .map((entry) => entry.amount)
     .reduce((acc, value) => acc + +value, 0);
@@ -57,104 +51,70 @@ export default function EntryListNew(props) {
     .reduce((acc, value) => acc + +value, 0);
   console.log(totalGift);
 
-  useEffect(() => {
-    localStorage.setItem("entries", JSON.stringify(entries));
-  }, [entries]);
+  const navigateToEntryForm = () => {
+    navigate(`/entry/new?event=${eventId}`);
+  };
+
+  const moveToEventListPage = () => {
+    navigate("/eventslist");
+  };
 
   return (
     <div className="entry_container">
       <div className="entry_header">
         <AiOutlineArrowLeft
           className="entry_header_icon"
-          // onClick={moveToFrontPage}
+          onClick={moveToEventListPage}
         />
         <h1>Entry</h1>
         <BsPersonCircle className="event_header_icon" />
       </div>
       <div className="entry_content">
-        {showList ? (
-          <div className="event-list-container">
-            {entries.length > 0 && (
-              <>
-                <div className="entry-inner-box">
-                  {/* onClick={moveToEntry} */}
-                  <div className="entry_head_name">
-                    <h1 className="entry-title">Entry List</h1>
-                    <table className="entry-table">
-                      {/* <thead> */}
-                      <tr>
-                        <th>Person Name</th>
-                        <th>Amount</th>
-                        <th>Gift</th>
-                      </tr>
-                      {/* </thead> */}
-                      {/* <tbody> */}
-                      <EntryList entries={entries} />
-                      {/* </tbody> */}
-                      <tr className="total-entry">
-                        <td>Total</td>
-                        <td>{totalAmount}</td>
-                        <td>{totalGift}</td>
-                      </tr>
-                    </table>
-                  </div>
-                </div>
-              </>
-            )}
-
-            {entries.length < 1 && <p>No Entries found</p>}
-            <button
-              className="addentry-button"
-              onClick={() => setShowList(false)}
-            >
-              Add New Entry
-            </button>
-          </div>
-        ) : (
-          <form className="entry_form" onSubmit={handleSubmitEvent}>
-            <h1 className="entry-title">Add New Entry</h1>
-            <input
-              className="entry_inputs"
-              type="text"
-              name="name"
-              required
-              onChange={(e) => setPersonName(e.target.value)}
-              value={personName}
-              placeholder="Person Name"
-            />
-            <input
-              className="entry_inputs"
-              type="text"
-              required
-              name="city"
-              onChange={(e) => setCity(e.target.value)}
-              value={city}
-              placeholder="City Name"
-            />
-            <input
-              className="entry_inputs"
-              type="number"
-              required
-              name="amount"
-              onChange={(e) => setAmount(e.target.value)}
-              value={amount}
-            />
-            <input
-              className="entry_inputs"
-              type="number"
-              required
-              name="gift"
-              onChange={(e) => setGift(e.target.value)}
-              value={gift}
-            />
-            {/* <button type="submit" onClick={() => setShow(!show)}> */}
-            <button className="entry_button" type="submit">
-              Add Entry
-            </button>
-          </form>
+        {entries.length > 0 && (
+          <>
+            <div className="entry-inner-box">
+              {/* onClick={moveToEntry} */}
+              <div className="entry_head_name">
+                {eventsList.map((eventId) => (
+                  <h1 className="entry-title">{eventId.name}</h1>
+                ))}
+                <table className="entry-table">
+                  <tr>
+                    <th>Person Name</th>
+                    <th>Amount</th>
+                    <th>Gift</th>
+                  </tr>
+                  {entries.map((entry) => (
+                    <tr key={entry}>
+                      <td>{entry.personName}</td>
+                      <td>{entry.amount}</td>
+                      <td>{entry.gift}</td>
+                    </tr>
+                  ))}
+                  {eventsList.map((event) => (
+                    <tr className="total-entry">
+                      <td>Total</td>
+                      <td>{totalAmount}</td>
+                      <td>{totalGift}</td>
+                    </tr>
+                  ))}
+                </table>
+              </div>
+            </div>
+          </>
         )}
+
+        {entries.length < 1 && <p>No Entries found</p>}
+        <button className="addentry-button" onClick={navigateToEntryForm}>
+          Add New Entry
+        </button>
       </div>
-      <Footer />
+
+      <div className="footer_container">
+        <AiFillHome />
+        <GrAddCircle onClick={navigateToEntryForm} />
+        <BiMenu />
+      </div>
     </div>
   );
 }

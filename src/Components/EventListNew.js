@@ -4,10 +4,13 @@ import Footer from "./Footer";
 import { AiOutlineArrowLeft, AiFillEdit } from "react-icons/ai";
 import { BsPersonCircle } from "react-icons/bs";
 import { MdDelete } from "react-icons/md";
+import { BiMenu } from "react-icons/bi";
+import { AiFillHome } from "react-icons/ai";
+import { GrAddCircle } from "react-icons/gr";
 import { useNavigate } from "react-router-dom";
 
 const getDatafromEvent = () => {
-  const data = localStorage.getItem("eventss");
+  const data = localStorage.getItem("eventsList");
   if (data) {
     return JSON.parse(data);
   } else {
@@ -25,9 +28,8 @@ const getEntryData = () => {
 
 export default function EventListNew() {
   const navigate = useNavigate();
-  const [eventss, setEventss] = useState(getDatafromEvent());
+  const [eventsList, setEventsList] = useState(getDatafromEvent());
   const [entries, setEntries] = useState(getEntryData());
-  const [showList] = useState(true);
 
   const getTotalAmount = (eventId) => {
     console.log("Getting total amount for event id :" + eventId);
@@ -54,40 +56,34 @@ export default function EventListNew() {
     navigate("/event/new");
   };
 
-  const moveToEntryList = (id) => {
+  const navigateToEntryList = (id) => {
     navigate(`/entryList?event=${id}`);
   };
-  // const moveToEntryForm = () => {
-  //   navigate("/EntryForm");
-  // };
 
-  useEffect(() => {
-    localStorage.setItem("eventss", JSON.stringify(eventss));
-  }, [eventss]);
-
+  const moveToFrontPage = () => {
+    navigate("/frontpage");
+  };
   return (
     <div className="event_container">
       <div className="event_header">
         <AiOutlineArrowLeft
           className="event_header_icon"
-          // onClick={moveToFrontPage}
+          onClick={moveToFrontPage}
         />
         <h1>Events</h1>
         <BsPersonCircle className="event_header_icon" />
       </div>
       <div className="event_content">
         <div className="event-list-container">
-          {eventss.length > 0 && (
+          {eventsList.length > 0 && (
             <>
-              {eventss.map((event) => (
+              {eventsList.map((event) => (
                 <div
                   className="event-inner-box"
-                  onClick={() => moveToEntryList(event.id)}
+                  onClick={() => navigateToEntryList(event.id)}
                 >
                   <div className="event_head_name">
                     <h4>{event.name}</h4>
-                    <AiFillEdit className="event_icon" />
-                    <MdDelete className="event_icon" />
                   </div>
                   <table className="event-table">
                     <tr>
@@ -104,14 +100,18 @@ export default function EventListNew() {
             </>
           )}
 
-          {eventss.length < 1 && <p>No Events found</p>}
+          {eventsList.length < 1 && <p>No Events found</p>}
 
           <button className="addevent-button" onClick={navigateToAddNewEvent}>
             Add New Event
           </button>
         </div>
       </div>
-      <Footer />
+      <div className="footer_container">
+        <AiFillHome />
+        <GrAddCircle onClick={navigateToAddNewEvent} />
+        <BiMenu />
+      </div>
     </div>
   );
 }

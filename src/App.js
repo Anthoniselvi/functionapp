@@ -6,12 +6,10 @@ import Entry from "./Components/Entry";
 // import Form from "./Components.css/Form";
 import "./App.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import AddNewEvent from "./Components/AddNewEvent";
+
 import EventListNew from "./Components/EventListNew";
-import EventsForm from "./Components/EventsForm";
-import EntryForm from "./Components/EntryForm";
-import EntryList from "./Components/EntryList";
 import EventFormNew from "./Components/EventFormNew";
+import EntryFormNew from "./Components/EntryFormNew";
 import EntryListNew from "./Components/EntryListNew";
 
 function App() {
@@ -26,9 +24,10 @@ function App() {
             {/* <Route path="signin" element={<Signin />} />
             <Route path="signup" element={<Signup />} /> */}
 
-            <Route path="eventlist" element={<EventListNew />} />
+            <Route path="eventslist" element={<EventListNew />} />
             <Route path="event/new" element={<EventFormNew />} />
             <Route path="entrylist" element={<EntryListNew />} />
+            <Route path="entry/new" element={<EntryFormNew />} />
 
             {/* <Route path="eventsform" element={<EventsForm />} />
             <Route path="addnewevent" element={<AddNewEvent />} />

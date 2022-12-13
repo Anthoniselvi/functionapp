@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import "./style.css";
-import Footer from "./Footer";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { BsPersonCircle } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+import { BiMenu } from "react-icons/bi";
+import { AiFillHome } from "react-icons/ai";
+import { GrAddCircle } from "react-icons/gr";
 
 const getDatafromEvent = () => {
-  const data = localStorage.getItem("eventss");
+  const data = localStorage.getItem("eventsList");
   if (data) {
     return JSON.parse(data);
   } else {
@@ -16,17 +18,16 @@ const getDatafromEvent = () => {
 
 export default function EventFormNew() {
   const navigate = useNavigate();
-  const [eventss, setEventss] = useState(getDatafromEvent());
+  const [eventsList, setEventsList] = useState(getDatafromEvent());
 
   const [name, setName] = useState("");
   const [place, setPlace] = useState("");
   const [date, setDate] = useState("");
 
   const handleSubmitEvent = (e) => {
-    console.log();
     e.preventDefault();
     let newEvent = {
-      id: eventss.length + 1,
+      id: eventsList.length + 1,
       name,
       place,
       date,
@@ -35,8 +36,15 @@ export default function EventFormNew() {
     setPlace("");
     setDate("");
 
-    localStorage.setItem("eventss", JSON.stringify([...eventss, newEvent]));
-    navigate("/eventlist");
+    localStorage.setItem(
+      "eventsList",
+      JSON.stringify([...eventsList, newEvent])
+    );
+    navigate("/eventslist");
+  };
+
+  const navigateToAddNewEvent = () => {
+    navigate("/event/new");
   };
 
   return (
@@ -83,7 +91,11 @@ export default function EventFormNew() {
           </button>
         </form>
       </div>
-      <Footer />
+      <div className="footer_container">
+        <AiFillHome />
+        <GrAddCircle onClick={navigateToAddNewEvent} />
+        <BiMenu />
+      </div>
     </div>
   );
 }

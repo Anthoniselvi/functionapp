@@ -1,6 +1,5 @@
 import React from "react";
 import "./style.css";
-import AddNewEvent from "./AddNewEvent";
 import { BiMenu } from "react-icons/bi";
 import { AiFillHome } from "react-icons/ai";
 import { GrAddCircle } from "react-icons/gr";
@@ -10,7 +9,7 @@ function Footer() {
   const navigate = useNavigate();
 
   function moveToAddNewEvent() {
-    navigate("/AddNewEvent");
+    // navigate("/AddNewEvent");
   }
   return (
     <div className="footer_container">
