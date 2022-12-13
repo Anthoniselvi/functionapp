@@ -81,20 +81,6 @@ export default function EventsForm({ totalAmount, totalGift }) {
                     </tr>
                   </table>
                 </div>
-                {/* <h1>Event List</h1>
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>Name</th>
-                        <th>Place</th>
-                        <th>Date</th>
-                      </tr>
-                    </thead> */}
-                {/* <tbody>
-                      <EventList eventss={eventss} />
-                    </tbody>
-                  </table>
-                </div> */}
               </>
             )}
 

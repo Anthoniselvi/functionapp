@@ -7,6 +7,7 @@ import { AiOutlineArrowLeft, AiFillEdit } from "react-icons/ai";
 import { BiSearch } from "react-icons/bi";
 import { BsPersonCircle, BsFillPersonFill } from "react-icons/bs";
 import { MdDelete } from "react-icons/md";
+import { useSearchParams } from "react-router-dom";
 
 const getDatafromEntry = () => {
   const data = localStorage.getItem("entries");
@@ -16,12 +17,12 @@ const getDatafromEntry = () => {
     return [];
   }
 };
-export default function EntryForm() {
+export default function EntryForm(props) {
   const [entries, setEntries] = useState(getDatafromEntry());
   const [personName, setPersonName] = useState("");
   const [city, setCity] = useState("");
-  const [amount, setAmount] = useState("");
-  const [gift, setGift] = useState("");
+  const [amount, setAmount] = useState(0);
+  const [gift, setGift] = useState(0);
   const [showList, setShowList] = useState(false);
 
   const handleSubmitEvent = (e) => {
