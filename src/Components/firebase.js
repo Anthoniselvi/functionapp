@@ -1,5 +1,4 @@
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
 import {
   getAuth,
   GoogleAuthProvider,
@@ -9,16 +8,15 @@ import { getStorage } from "firebase/storage";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCUta7xbRK0Wqn6BUV297R2VjQSspk-lw4",
-  authDomain: "santa-81bc5.firebaseapp.com",
-  projectId: "santa-81bc5",
-  storageBucket: "santa-81bc5.appspot.com",
-  messagingSenderId: "63979182028",
-  appId: "1:63979182028:web:01144f1e932dd0370c2f69",
+  apiKey: "AIzaSyBAK0EeindIp7n0Zs7k1gZSfwcp7nrYzsM",
+  authDomain: "functionapp-c76ba.firebaseapp.com",
+  projectId: "functionapp-c76ba",
+  storageBucket: "functionapp-c76ba.appspot.com",
+  messagingSenderId: "813622487992",
+  appId: "1:813622487992:web:f4c8ec720cfa7a7c603d4d",
 };
-// Initialize Firebase
+
 export const app = initializeApp(firebaseConfig);
-export const analytics = getAnalytics();
 export const auth = getAuth();
 export const storage = getStorage();
 export const db = getFirestore();

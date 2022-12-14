@@ -1,20 +1,57 @@
-import React from "react";
+import React, { useState } from "react";
 import FrontPage from "./FrontPage";
 import Signin from "./Signin";
 import "./style.css";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import { auth } from "./firebase";
+import Validation from "./Validation";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 function Signup() {
+  const [signupData, setSignupData] = useState({
+    fullname: "",
+    email: "",
+    phone: "",
+    password: "",
+  });
+  const [errors, setErrors] = useState({});
+  const [dataIsCorrect, setDataIsCorrect] = useState(false);
   const navigate = useNavigate();
+  const [err, setErr] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  function moveToFrontPage() {
-    navigate("/FrontPage");
-  }
+  const moveToFrontPage = () => {
+    navigate("/frontpage");
+  };
+  const updateHandleChange = (event) => {
+    setSignupData({
+      ...signupData,
+      [event.target.name]: event.target.value,
+    });
+  };
 
-  function moveToSignin() {
-    navigate("/Signin");
-  }
+  const handleSubmitSignup = async (e) => {
+    setLoading(true);
+    e.preventDefault();
+    setErrors(Validation(signupData));
+    setDataIsCorrect(true);
+
+    const fullname = e.target[0].value;
+    const email = e.target[1].value;
+    const phone = e.target[2].value;
+    const password = e.target[2].value;
+
+    try {
+      const res = await createUserWithEmailAndPassword(auth, email, password);
+      console.log(res);
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+      setErr(true);
+      setLoading(false);
+    }
+  };
   return (
     <div className="signup_container">
       <div className="signup_top_container">
@@ -28,17 +65,17 @@ function Signup() {
         </p>
       </div>
       <div className="signup_bottom_container">
-        <form className="signup_form">
+        <form className="signup_form" onSubmit={handleSubmitSignup}>
           <div className="signup_input_container">
             <label className="signup_label">Full Name</label>
             <input
               className="signup_input"
               type="text"
               name="fullname"
-              //   value={values.fullname}
-              //   onChange={handleChange}
+              value={signupData.fullname}
+              onChange={updateHandleChange}
             />
-            {/* {errors.fullname && <p className="error">{errors.fullname}</p>} */}
+            {errors.fullname && <p className="error">{errors.fullname}</p>}
           </div>
           <div className="signup_input_container">
             <label className="signup_label">Email</label>
@@ -46,10 +83,10 @@ function Signup() {
               className="signup_input"
               type="email"
               name="email"
-              //   value={values.email}
-              //   onChange={handleChange}
+              value={signupData.email}
+              onChange={updateHandleChange}
             />
-            {/* {errors.email && <p className="error">{errors.email}</p>} */}
+            {errors.email && <p className="error">{errors.email}</p>}
           </div>
           <div className="signup_input_container">
             <label className="signup_label">Mobile Number</label>
@@ -57,10 +94,10 @@ function Signup() {
               className="signup_input"
               type="text"
               name="phone"
-              //   value={values.phone}
-              //   onChange={handleChange}
+              value={signupData.phone}
+              onChange={updateHandleChange}
             />
-            {/* {errors.phone && <p className="error">{errors.phone}</p>} */}
+            {errors.phone && <p className="error">{errors.phone}</p>}
           </div>
 
           <div className="signup_input_container">
@@ -69,15 +106,13 @@ function Signup() {
               className="signup_input"
               type="password"
               name="password"
-              //   value={values.password}
-              //   onChange={handleChange}
+              value={signupData.password}
+              onChange={updateHandleChange}
             />
-            {/* {errors.password && <p className="error">{errors.password}</p>} */}
+            {errors.password && <p className="error">{errors.password}</p>}
           </div>
 
-          <button className="signup_sign_button" onClick={moveToSignin}>
-            Sign Up
-          </button>
+          <button className="signup_sign_button">Sign Up</button>
         </form>
       </div>
     </div>

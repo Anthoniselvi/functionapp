@@ -5,7 +5,9 @@
     display: flex;
     flex-direction: column;
     height: 100%;
+    overflow-y:scroll;
 }
+   
 .front_top_container{
     height: 55%;
     background-color: #fdfffc;
@@ -402,4 +404,6 @@ height: 50px;
       border-radius: 10px;
       gap: 20px;
     }
-  
+  .error{
+    color: red;
+  }

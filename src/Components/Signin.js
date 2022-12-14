@@ -1,13 +1,19 @@
 import React from "react";
-
 import "./style.css";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import { BsFacebook } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+import { auth, google, facebook } from "./firebase";
+import { signInWithPopup } from "firebase/auth";
 
 function Signin() {
   const navigate = useNavigate();
+
+  const login = async (provider) => {
+    const result = await signInWithPopup(auth, provider);
+    console.log(result);
+  };
 
   function moveToFrontPage() {
     navigate("/FrontPage");
@@ -49,12 +55,12 @@ function Signin() {
         <button className="signin_sign_button" onClick={moveToEvent}>
           Sign In
         </button>
-        <div className="signin_google">
+        <div className="signin_google" onClick={() => login(google)}>
           <FcGoogle />
           <p>Continue with Google</p>
           <AiOutlineArrowRight />
         </div>
-        <div className="signin_facebook">
+        <div className="signin_facebook" onClick={() => login(facebook)}>
           <BsFacebook />
           <p>Continue with Facebook</p>
           <AiOutlineArrowRight />

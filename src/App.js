@@ -2,8 +2,6 @@ import React from "react";
 import FrontPage from "./Components/FrontPage";
 import Signin from "./Components/Signin";
 import Signup from "./Components/Signup";
-import Entry from "./Components/Entry";
-// import Form from "./Components.css/Form";
 import "./App.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
@@ -21,8 +19,8 @@ function App() {
             <Route index element={<FrontPage />} />
             <Route path="frontpage" element={<FrontPage />} />
 
-            {/* <Route path="signin" element={<Signin />} />
-            <Route path="signup" element={<Signup />} /> */}
+            {/* <Route path="signin" element={<Signin />} /> */}
+            <Route path="signup" element={<Signup />} />
 
             <Route path="eventslist" element={<EventListNew />} />
             <Route path="event/new" element={<EventFormNew />} />
