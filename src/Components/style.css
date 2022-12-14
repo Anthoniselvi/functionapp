@@ -7,6 +7,7 @@
     height: 100%;
     overflow-y:hidden;
 }
+
    
 .front_top_container{
     height: 55%;
@@ -245,6 +246,7 @@ font-size: 15px;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    margin-bottom:20px;
   }
   .event_head_name{
     display: grid;
@@ -406,4 +408,12 @@ height: 50px;
     }
   .error{
     color: red;
+  }
+  .social-login{
+
+    padding: 20px;
+    padding-top: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   }

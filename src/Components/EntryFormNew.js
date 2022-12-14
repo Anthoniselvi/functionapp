@@ -10,19 +10,19 @@ import { BiMenu } from "react-icons/bi";
 import { AiFillHome } from "react-icons/ai";
 import { GrAddCircle } from "react-icons/gr";
 
-const getDatafromEntry = (eventId) => {
-  //   const data = localStorage.getItem("entries");
-  //   console.log("getdataentry:" + data);
-  //   if (data) {
-  //     return JSON.parse(data).filter((entry) => {
-  //       return parseInt(entry.eventId) === parseInt(eventId);
-  //     });
-  //   } else {
-  //     return [];
-  //   }
-};
-const getTotalDatafromEntry = (eventId) => {
-  const data = localStorage.getItem("totalEntries");
+// const getDatafromEntry = (eventId) => {
+//   const data = localStorage.getItem("entries");
+//   console.log("getdataentry:" + data);
+//   if (data) {
+//     return JSON.parse(data).filter((entry) => {
+//       return parseInt(entry.eventId) === parseInt(eventId);
+//     });
+//   } else {
+//     return [];
+//   }
+// };
+const getTotalDatafromEntry = () => {
+  const data = localStorage.getItem("entries");
   console.log("getTotaldataentry:" + data);
   if (data) {
     return JSON.parse(data);
@@ -36,10 +36,8 @@ export default function EntryFormNew() {
   const [searchParam] = useSearchParams();
   const eventId = searchParam.get("event");
 
-  const [entries, setEntries] = useState(getDatafromEntry(eventId));
-  const [totalEntries, setTotalEntries] = useState(
-    getTotalDatafromEntry(eventId)
-  );
+  // const [entries, setEntries] = useState();
+  const [totalEntries, setTotalEntries] = useState(getTotalDatafromEntry());
   const [personName, setPersonName] = useState("");
   const [city, setCity] = useState("");
   const [amount, setAmount] = useState(0);
@@ -49,7 +47,7 @@ export default function EntryFormNew() {
     console.log("handlesubmit entries:" + totalEntries);
     console.log(eventId);
     e.preventDefault();
-    let totalentry = {
+    let newEntry = {
       id: totalEntries.length + 1,
       personName,
       city,
@@ -62,10 +60,10 @@ export default function EntryFormNew() {
     setCity("");
     setAmount("");
     setGift("");
-    console.log("totalEntries:" + totalEntries, "totalentry:" + totalentry);
+    console.log("totalEntries:" + totalEntries, "totalentry:" + newEntry);
     localStorage.setItem(
-      "totalEntries",
-      JSON.stringify([...totalEntries, totalentry])
+      "entries",
+      JSON.stringify([...totalEntries, newEntry])
     );
 
     navigate(`/entryList?event=${eventId}`);
@@ -78,6 +76,59 @@ export default function EntryFormNew() {
   const navigateToEntryForm = () => {
     navigate(`/entry/new?event=${eventId}`);
   };
+
+  // const getDatafromEntry = (eventId) => {
+  //   const data = localStorage.getItem("entries");
+  //   console.log("getdataentry:" + data);
+  //   if (data) {
+  //     return JSON.parse(data).filter((entry) => {
+  //       return parseInt(entry.eventId) === parseInt(eventId);
+  //     });
+  //   } else {
+  //     return [];
+  //   }
+  // };
+
+  // export default function EntryForm() {
+  //   const navigate = useNavigate();
+  //   const [searchParam] = useSearchParams();
+  //   const eventId = searchParam.get("event");
+
+  //   const [entries, setEntries] = useState(getDatafromEntry(eventId));
+  //   const [personName, setPersonName] = useState("");
+  //   const [city, setCity] = useState("");
+  //   const [amount, setAmount] = useState(0);
+  //   const [gift, setGift] = useState(0);
+
+  //   const handleSubmitEvent = (e) => {
+  //     console.log("handlesubmit entries:" + entries);
+  //     console.log(eventId);
+  //     e.preventDefault();
+  //     let entry = {
+  //       id: entries.length + 1,
+  //       personName,
+  //       city,
+  //       amount,
+  //       gift,
+  //       eventId,
+  //     };
+
+  //     setPersonName("");
+  //     setCity("");
+  //     setAmount("");
+  //     setGift("");
+  //     console.log("entries:" + entries, "entry:" + entry);
+  //     localStorage.setItem("entries", JSON.stringify([...entries, entry]));
+  //     // navigate("/entrylist");
+  //     navigate(`/entryList?event=${eventId}`);
+  //   };
+  //   const moveToEventListPage = () => {
+  //     navigate("/eventslist");
+  //   };
+
+  //   const navigateToEntryForm = () => {
+  //     navigate(`/entry/new?event=${eventId}`);
+  //   };
 
   return (
     <div className="entry_container">

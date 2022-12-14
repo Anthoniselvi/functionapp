@@ -92,15 +92,17 @@ function Signin() {
         </a>
         <button className="signin_sign_button">Sign In</button>
       </form>
-      <div className="signin_google" onClick={() => login(google)}>
-        <FcGoogle />
-        <p>Continue with Google</p>
-        <AiOutlineArrowRight />
-      </div>
-      <div className="signin_facebook" onClick={() => login(facebook)}>
-        <BsFacebook />
-        <p>Continue with Facebook</p>
-        <AiOutlineArrowRight />
+      <div className="social-login">
+        <div className="signin_google" onClick={() => login(google)}>
+          <FcGoogle />
+          <p>Continue with Google</p>
+          <AiOutlineArrowRight />
+        </div>
+        <div className="signin_facebook" onClick={() => login(facebook)}>
+          <BsFacebook />
+          <p>Continue with Facebook</p>
+          <AiOutlineArrowRight />
+        </div>
       </div>
     </div>
   );
