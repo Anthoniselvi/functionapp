@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FrontPage from "./FrontPage";
 import Signin from "./Signin";
 import "./style.css";
@@ -52,6 +52,12 @@ function Signup() {
       setLoading(false);
     }
   };
+  useEffect(() => {
+    if (Object.keys(errors).length === 0 && dataIsCorrect) {
+      alert("signup successfully");
+      navigate("/eventslist");
+    }
+  }, [errors]);
   return (
     <div className="signup_container">
       <div className="signup_top_container">

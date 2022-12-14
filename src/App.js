@@ -19,17 +19,13 @@ function App() {
             <Route index element={<FrontPage />} />
             <Route path="frontpage" element={<FrontPage />} />
 
-            {/* <Route path="signin" element={<Signin />} /> */}
+            <Route path="signin" element={<Signin />} />
             <Route path="signup" element={<Signup />} />
 
             <Route path="eventslist" element={<EventListNew />} />
             <Route path="event/new" element={<EventFormNew />} />
             <Route path="entrylist" element={<EntryListNew />} />
             <Route path="entry/new" element={<EntryFormNew />} />
-
-            {/* <Route path="eventsform" element={<EventsForm />} />
-            <Route path="addnewevent" element={<AddNewEvent />} />
-            <Route path="entryform" element={<EntryForm />} /> */}
           </Route>
         </Routes>
       </BrowserRouter>
