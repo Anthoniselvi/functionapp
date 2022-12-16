@@ -60,6 +60,14 @@ export default function EntriesList() {
   };
 
   const editEntry = (id) => {
+    navigate(`/entry/new?event=${eventId}`);
+    let newEditEntry = entries.find((entry) => {
+      return entry.id === id;
+    });
+    // console.log(newEditEntry);
+    // setToggleSubmit(false);
+    // setInputData(newEditEntry.name);
+    // setIsEditItem(id);
     // const entryArray = entries.find((item) => item.id !== id);
     // console.log(entryArray);
     // setEntries(entryArray);
@@ -115,7 +123,7 @@ export default function EntriesList() {
                       <td>{entry.amount}</td>
                       <td>{entry.gift}</td>
                       <td>
-                        <AiFillEdit onClick={editEntry(entry.id)} />
+                        <AiFillEdit onClick={() => editEntry(entry.id)} />
                       </td>
                       <td>
                         <MdDelete onClick={() => deleteEntry(entry.id)} />
