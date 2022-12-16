@@ -59,6 +59,29 @@ export default function EntriesList() {
     navigate("/eventslist");
   };
 
+  const editEntry = (id) => {
+    // const entryArray = entries.find((item) => item.id !== id);
+    // console.log(entryArray);
+    // setEntries(entryArray);
+    // entries.map((entry) => {
+    //   return entry.id === id
+    //     ? {
+    //         id: entry.id,
+    //         name: entry.name,
+    //         city: entry.city,
+    //         amount: entry.amount,
+    //         gift: entry.gift,
+    //       }
+    //     : entry;
+    // });
+  };
+
+  const deleteEntry = (id) => {
+    const entryArray = entries.filter((item) => item.id !== id);
+    console.log(entryArray);
+    setEntries(entryArray);
+  };
+
   return (
     <div className="entry_container">
       <div className="entry_header">
@@ -83,12 +106,20 @@ export default function EntriesList() {
                     <th>Person Name</th>
                     <th>Amount</th>
                     <th>Gift</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                   </tr>
                   {entries.map((entry) => (
                     <tr key={entry}>
                       <td>{entry.personName}</td>
                       <td>{entry.amount}</td>
                       <td>{entry.gift}</td>
+                      <td>
+                        <AiFillEdit onClick={editEntry(entry.id)} />
+                      </td>
+                      <td>
+                        <MdDelete onClick={() => deleteEntry(entry.id)} />
+                      </td>
                     </tr>
                   ))}
                   {eventsList.map((event) => (
