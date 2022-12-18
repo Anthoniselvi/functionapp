@@ -33,11 +33,21 @@ const getDatafromEntry = (eventId) => {
   }
 };
 
+const getTotalDatafromEntry = () => {
+  const data = localStorage.getItem("entries");
+  console.log("getTotaldataentry:" + data);
+  if (data) {
+    return JSON.parse(data);
+  } else {
+    return [];
+  }
+};
+
 export default function EntriesList() {
   const navigate = useNavigate();
   const [searchParam] = useSearchParams();
   const eventId = searchParam.get("event");
-
+  const [totalEntries, setTotalEntries] = useState(getTotalDatafromEntry());
   const [eventsList, setEventsList] = useState(getDatafromEvent(eventId));
   const [entries, setEntries] = useState(getDatafromEntry(eventId));
 
@@ -60,34 +70,22 @@ export default function EntriesList() {
   };
 
   const editEntry = (id) => {
-    navigate(`/entry/new?event=${eventId}`);
-    let newEditEntry = entries.find((entry) => {
-      return entry.id === id;
-    });
-    // console.log(newEditEntry);
-    // setToggleSubmit(false);
-    // setInputData(newEditEntry.name);
-    // setIsEditItem(id);
-    // const entryArray = entries.find((item) => item.id !== id);
-    // console.log(entryArray);
-    // setEntries(entryArray);
-    // entries.map((entry) => {
-    //   return entry.id === id
-    //     ? {
-    //         id: entry.id,
-    //         name: entry.name,
-    //         city: entry.city,
-    //         amount: entry.amount,
-    //         gift: entry.gift,
-    //       }
-    //     : entry;
+    // navigate(`/entry/new?event=${eventId}`);
+    // let newEditEntry = entries.find((entry) => {
+    //   return entry.id === id;
     // });
+    // console.log("editEntry: " + newEditEntry);
+    // setEntries(newEditEntry);
+    localStorage.setItem("editEntry", id);
+    navigate("/edit");
   };
 
   const deleteEntry = (id) => {
-    const entryArray = entries.filter((item) => item.id !== id);
-    console.log(entryArray);
-    setEntries(entryArray);
+    const entryArray = totalEntries.filter((item) => item.id !== id);
+    console.log("deleteEntry: " + entryArray);
+    setTotalEntries(entryArray);
+
+    localStorage.setItem("entries", JSON.stringify(entryArray));
   };
 
   return (

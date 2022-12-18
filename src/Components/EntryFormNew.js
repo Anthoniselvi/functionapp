@@ -77,59 +77,6 @@ export default function EntryFormNew() {
     navigate(`/entry/new?event=${eventId}`);
   };
 
-  // const getDatafromEntry = (eventId) => {
-  //   const data = localStorage.getItem("entries");
-  //   console.log("getdataentry:" + data);
-  //   if (data) {
-  //     return JSON.parse(data).filter((entry) => {
-  //       return parseInt(entry.eventId) === parseInt(eventId);
-  //     });
-  //   } else {
-  //     return [];
-  //   }
-  // };
-
-  // export default function EntryForm() {
-  //   const navigate = useNavigate();
-  //   const [searchParam] = useSearchParams();
-  //   const eventId = searchParam.get("event");
-
-  //   const [entries, setEntries] = useState(getDatafromEntry(eventId));
-  //   const [personName, setPersonName] = useState("");
-  //   const [city, setCity] = useState("");
-  //   const [amount, setAmount] = useState(0);
-  //   const [gift, setGift] = useState(0);
-
-  //   const handleSubmitEvent = (e) => {
-  //     console.log("handlesubmit entries:" + entries);
-  //     console.log(eventId);
-  //     e.preventDefault();
-  //     let entry = {
-  //       id: entries.length + 1,
-  //       personName,
-  //       city,
-  //       amount,
-  //       gift,
-  //       eventId,
-  //     };
-
-  //     setPersonName("");
-  //     setCity("");
-  //     setAmount("");
-  //     setGift("");
-  //     console.log("entries:" + entries, "entry:" + entry);
-  //     localStorage.setItem("entries", JSON.stringify([...entries, entry]));
-  //     // navigate("/entrylist");
-  //     navigate(`/entryList?event=${eventId}`);
-  //   };
-  //   const moveToEventListPage = () => {
-  //     navigate("/eventslist");
-  //   };
-
-  //   const navigateToEntryForm = () => {
-  //     navigate(`/entry/new?event=${eventId}`);
-  //   };
-
   return (
     <div className="entry_container">
       <div className="entry_header">

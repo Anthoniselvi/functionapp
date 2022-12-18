@@ -1,12 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-
+import DataTable from "./Components/EditEntry";
 import App from "./App";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <App />
+    {/* <DataTable /> */}
   </React.StrictMode>
 );
 

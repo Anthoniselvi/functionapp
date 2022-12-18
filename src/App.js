@@ -9,6 +9,8 @@ import EventListNew from "./Components/EventListNew";
 import EventFormNew from "./Components/EventFormNew";
 import EntryFormNew from "./Components/EntryFormNew";
 import EntryListNew from "./Components/EntryListNew";
+import Edit from "./Components/Edit";
+import DataTable from "./Components/EditEntry";
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
             <Route path="event/new" element={<EventFormNew />} />
             <Route path="entrylist" element={<EntryListNew />} />
             <Route path="entry/new" element={<EntryFormNew />} />
+            <Route path="edit" element={<Edit />} />
+            <Route path="editEntry" element={<DataTable />} />
           </Route>
         </Routes>
       </BrowserRouter>
