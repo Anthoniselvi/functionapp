@@ -80,19 +80,20 @@ export default function EventListNew() {
   };
 
   const deleteEvent = (id) => {
-    const eventArray = eventsList.filter((singleEvent) => {
-      return singleEvent.id !== id;
+    const eventArray = totalEvents.filter((singleEvent) => {
+      return parseInt(singleEvent.id) !== parseInt(id);
     });
-    console.log("deleteEvent: " + eventArray);
+
     setTotalEvents(eventArray);
     localStorage.setItem("eventsList", JSON.stringify(totalEvents));
-    setEventsList(getDatafromEvent(id));
+    console.log("deleted Event List: " + JSON.stringify(totalEvents));
+    setEventsList(getDatafromEvent());
   };
 
   // useEffect(() => {
   //   localStorage.setItem("eventsList", JSON.stringify(totalEvents));
   //   setEventsList(getDatafromEvent());
-  // }, [totalEvents]);
+  // }, []);
 
   return (
     <div className="event_container">
@@ -115,7 +116,7 @@ export default function EventListNew() {
                 >
                   <div className="event_head_name">
                     <h4>{event.name}</h4>
-                    <GrNewWindow onClick={navigateToEntryList(event.id)} />
+                    <GrNewWindow onClick={navigateToEntryList} />
                     <AiFillEdit onClick={() => editEvent(event.id)} />
                     <MdDelete onClick={() => deleteEvent(event.id)} />
                   </div>

@@ -50,11 +50,12 @@ export default function EntryFormNew() {
     setCity("");
     setAmount("");
     setGift("");
-    console.log("totalEntries:" + totalEntries, "totalentry:" + newEntry);
+    // console.log("totalEntries:" + totalEntries, "totalentry:" + newEntry);
     localStorage.setItem(
       "entries",
       JSON.stringify([...totalEntries, newEntry])
     );
+    console.log("entries-entryform:" + JSON.stringify(totalEntries));
     setEntries(getTotalDatafromEntry());
     navigate(`/entryList?event=${eventId}`);
   };
