@@ -51,13 +51,6 @@ export default function EntriesList() {
   const [eventsList, setEventsList] = useState(getDatafromEvent(eventId));
   const [entries, setEntries] = useState(getDatafromEntry(eventId));
 
-  // useEffect(() => {
-  //   const loadEntries = () => {
-  //     localStorage.getItem("entries").then((res) => {
-  //       setEntries(res.data.reverse());
-  //     });
-  //   };
-  // }, []);
   const totalAmount = entries
     .map((entry) => entry.amount)
     .reduce((acc, value) => acc + +value, 0);
@@ -86,15 +79,14 @@ export default function EntriesList() {
     });
     // console.log("deleteEntry: " + entryArray);
     setTotalEntries(entryArray);
-    // localStorage.setItem("entries", JSON.stringify(entryArray));
-    localStorage.setItem("entries", JSON.stringify(totalEntries));
-    setEntries(getDatafromEntry(eventId));
+    // localStorage.setItem("entries", JSON.stringify(totalEntries));
+    // setEntries(getDatafromEntry(eventId));
   };
 
-  // useEffect(() => {
-  //   localStorage.setItem("entries", JSON.stringify(totalEntries));
-  //   setEntries(getDatafromEntry(eventId));
-  // }, [totalEntries]);
+  useEffect(() => {
+    localStorage.setItem("entries", JSON.stringify(totalEntries));
+    setEntries(getDatafromEntry(eventId));
+  }, [totalEntries]);
 
   return (
     <div className="entry_container">

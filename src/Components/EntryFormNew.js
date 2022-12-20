@@ -10,17 +10,6 @@ import { BiMenu } from "react-icons/bi";
 import { AiFillHome } from "react-icons/ai";
 import { GrAddCircle } from "react-icons/gr";
 
-// const getDatafromEntry = (eventId) => {
-//   const data = localStorage.getItem("entries");
-//   console.log("getdataentry:" + data);
-//   if (data) {
-//     return JSON.parse(data).filter((entry) => {
-//       return parseInt(entry.eventId) === parseInt(eventId);
-//     });
-//   } else {
-//     return [];
-//   }
-// };
 const getTotalDatafromEntry = () => {
   const data = localStorage.getItem("entries");
   console.log("getTotaldataentry:" + data);
@@ -36,7 +25,7 @@ export default function EntryFormNew() {
   const [searchParam] = useSearchParams();
   const eventId = searchParam.get("event");
 
-  // const [entries, setEntries] = useState();
+  const [entries, setEntries] = useState();
   const [totalEntries, setTotalEntries] = useState(getTotalDatafromEntry());
   const [personName, setPersonName] = useState("");
   const [city, setCity] = useState("");
@@ -44,7 +33,7 @@ export default function EntryFormNew() {
   const [gift, setGift] = useState(0);
   const [selected, setSelected] = useState("amount");
 
-  const handleSubmitEvent = (e) => {
+  const handleSubmitEntry = (e) => {
     console.log("handlesubmit entries:" + totalEntries);
     console.log(eventId);
     e.preventDefault();
@@ -66,7 +55,7 @@ export default function EntryFormNew() {
       "entries",
       JSON.stringify([...totalEntries, newEntry])
     );
-
+    setEntries(getTotalDatafromEntry());
     navigate(`/entryList?event=${eventId}`);
   };
 
@@ -89,7 +78,7 @@ export default function EntryFormNew() {
         <BsPersonCircle className="event_header_icon" />
       </div>
       <div className="entry_content">
-        <form className="entry_form" onSubmit={handleSubmitEvent}>
+        <form className="entry_form" onSubmit={handleSubmitEntry}>
           <h1 className="entry-title">Add New Entry</h1>
           <input
             className="entry_inputs"
