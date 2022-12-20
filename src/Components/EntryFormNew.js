@@ -112,15 +112,18 @@ export default function EntryFormNew() {
           <div className="entry_radio_container">
             <label>Type of Presentation: </label>
             <div className="entry_radio_inputs">
-              <input
-                name="radio"
-                type="radio"
-                value="amount"
-                defaultChecked={selected === "amount"}
-                onChange={(e) => setSelected(e.target.value)}
-              />
+              <div className="row">
+                <input
+                  className=""
+                  name="radio"
+                  type="radio"
+                  value="amount"
+                  defaultChecked={selected === "amount"}
+                  onChange={(e) => setSelected(e.target.value)}
+                />
 
-              <label htmlFor="amount">Amount</label>
+                <label htmlFor="amount">Amount</label>
+              </div>
               {/* {selected === "amount" && ( */}
               <input
                 className="entry_inputs"
@@ -134,14 +137,16 @@ export default function EntryFormNew() {
               {/* )} */}
             </div>
             <div className="entry_radio_inputs">
-              <input
-                name="radio"
-                type="radio"
-                value="gift"
-                defaultChecked={selected === "gift"}
-                onChange={(e) => setSelected(e.target.value)}
-              />
-              <label htmlFor="gift">No. of Gift</label>
+              <div className="row">
+                <input
+                  name="radio"
+                  type="radio"
+                  value="gift"
+                  defaultChecked={selected === "gift"}
+                  onChange={(e) => setSelected(e.target.value)}
+                />
+                <label htmlFor="gift">No. of Gift</label>
+              </div>
               {selected === "gift" && (
                 <>
                   <input
@@ -153,7 +158,9 @@ export default function EntryFormNew() {
                     value={gift}
                     placeholder="No. of Gift"
                   />
-                  <textarea>Type comments if any</textarea>
+                  <textarea className="entry_form_comments ">
+                    Type comments if any
+                  </textarea>
                 </>
               )}
             </div>
