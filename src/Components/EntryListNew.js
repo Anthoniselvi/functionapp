@@ -107,6 +107,10 @@ export default function EntriesList() {
                 {eventsList.map((eventId) => (
                   <h1 className="entry-title">{eventId.name}</h1>
                 ))}
+                <div>
+                  <BiSearch />
+                  <p>Search by Person Name</p>
+                </div>
                 <table className="entry-table">
                   <tr>
                     <th>Person Name</th>
