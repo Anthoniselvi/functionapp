@@ -42,6 +42,7 @@ export default function EntryFormNew() {
   const [city, setCity] = useState("");
   const [amount, setAmount] = useState(0);
   const [gift, setGift] = useState(0);
+  const [selected, setSelected] = useState("amount");
 
   const handleSubmitEvent = (e) => {
     console.log("handlesubmit entries:" + totalEntries);
@@ -108,22 +109,72 @@ export default function EntryFormNew() {
             value={city}
             placeholder="City Name"
           />
-          <input
+          <div className="entry_radio_container">
+            <label>Type of Presentation: </label>
+            <div className="entry_radio_inputs">
+              <input
+                name="radio"
+                type="radio"
+                value="amount"
+                defaultChecked={selected === "amount"}
+                onChange={(e) => setSelected(e.target.value)}
+              />
+
+              <label htmlFor="amount">Amount</label>
+              {/* {selected === "amount" && ( */}
+              <input
+                className="entry_inputs"
+                type="number"
+                required
+                name="amount"
+                onChange={(e) => setAmount(e.target.value)}
+                value={amount}
+                placeholder="Amount"
+              />
+              {/* )} */}
+            </div>
+            <div className="entry_radio_inputs">
+              <input
+                name="radio"
+                type="radio"
+                value="gift"
+                defaultChecked={selected === "gift"}
+                onChange={(e) => setSelected(e.target.value)}
+              />
+              <label htmlFor="gift">No. of Gift</label>
+              {selected === "gift" && (
+                <>
+                  <input
+                    className="entry_inputs"
+                    type="number"
+                    required
+                    name="gift"
+                    onChange={(e) => setGift(e.target.value)}
+                    value={gift}
+                    placeholder="No. of Gift"
+                  />
+                  <textarea>Type comments if any</textarea>
+                </>
+              )}
+            </div>
+          </div>
+          {/* <input
             className="entry_inputs"
             type="number"
             required
             name="amount"
             onChange={(e) => setAmount(e.target.value)}
             value={amount}
-          />
-          <input
+            placeholder="Amount"
+          /> */}
+          {/* <input
             className="entry_inputs"
             type="number"
             required
             name="gift"
             onChange={(e) => setGift(e.target.value)}
             value={gift}
-          />
+          /> */}
           <button className="entry_button" type="submit">
             Add Entry
           </button>

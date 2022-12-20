@@ -1,12 +1,9 @@
 // import { Button, TextField, Typography } from "@mui/material";
 import { useState } from "react";
+import "./style.css";
 import { useNavigate } from "react-router-dom";
 import EntryFormNew from "./EntryFormNew";
 import { useSearchParams } from "react-router-dom";
-
-// get single entry
-//  entry object
-// getindex[0]
 
 const getDataforSingleEntry = (entryId) => {
   const data = localStorage.getItem("entries");
@@ -34,7 +31,6 @@ function Edit() {
   const [searchParam] = useSearchParams();
   const entryId = searchParam.get("entry");
 
-  // const [entries, setEntries] = useState();
   const [totalEntries, setTotalEntries] = useState(getTotalDatafromEntry());
 
   const [editEntry, setEditEntry] = useState(getDataforSingleEntry(entryId));
@@ -69,7 +65,7 @@ function Edit() {
   };
 
   return (
-    <div className="entry_container">
+    <div className="editentry_container">
       {/* <div className="entry_header">
         <AiOutlineArrowLeft
           className="entry_header_icon"
@@ -116,7 +112,7 @@ function Edit() {
             value={gift}
           />
           <button className="entry_button" type="submit">
-            Add Entry
+            Edit
           </button>
         </form>
       </div>

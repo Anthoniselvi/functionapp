@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { BiMenu } from "react-icons/bi";
 import { AiFillHome } from "react-icons/ai";
 import { GrAddCircle } from "react-icons/gr";
+import { TextRotateUp } from "@mui/icons-material";
 
 const getDatafromEvent = () => {
   const data = localStorage.getItem("eventsList");
@@ -42,6 +43,7 @@ export default function EventFormNew() {
     );
     navigate("/eventslist");
   };
+  console.log("add new Event:" + eventsList);
 
   const navigateToAddNewEvent = () => {
     navigate("/event/new");

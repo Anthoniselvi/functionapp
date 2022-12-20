@@ -76,33 +76,25 @@ export default function EntriesList() {
     navigate("/eventslist");
   };
 
-  // const getEntry = (id) => {
-  //   const newEditEntry = totalEntries.find((entry) => entry.id === id);
-  //   return newEditEntry;
-  // };
   const editEntry = (id) => {
     navigate(`/edit?entry=${id}`);
-    // const newEditEntry = totalEntries.find((entry) => entry.id === id);
-    // return newEditEntry;
-    // console.log("editEntry: " + newEditEntry);
-    // setEntries(newEditEntry);
-    // localStorage.setItem("entries", JSON.stringify(newEditEntry));
-    // navigate(`/entrylist?event=${eventId}`);
   };
 
-  const handleDelete = (id) => {
+  const deleteEntry = (id) => {
     const entryArray = totalEntries.filter((item) => {
       return item.id !== id;
     });
     // console.log("deleteEntry: " + entryArray);
     setTotalEntries(entryArray);
     // localStorage.setItem("entries", JSON.stringify(entryArray));
-  };
-
-  useEffect(() => {
     localStorage.setItem("entries", JSON.stringify(totalEntries));
     setEntries(getDatafromEntry(eventId));
-  }, [totalEntries]);
+  };
+
+  // useEffect(() => {
+  //   localStorage.setItem("entries", JSON.stringify(totalEntries));
+  //   setEntries(getDatafromEntry(eventId));
+  // }, [totalEntries]);
 
   return (
     <div className="entry_container">
@@ -140,7 +132,7 @@ export default function EntriesList() {
                         <AiFillEdit onClick={() => editEntry(entry.id)} />
                       </td>
                       <td>
-                        <MdDelete onClick={() => handleDelete(entry.id)} />
+                        <MdDelete onClick={() => deleteEntry(entry.id)} />
                       </td>
                     </tr>
                   ))}
