@@ -41,6 +41,7 @@ export default function EventListNew() {
   const [eventsList, setEventsList] = useState(getDatafromEvent());
   const [entries, setEntries] = useState(getEntryData());
   const [totalEvents, setTotalEvents] = useState(getTotalDatafromEvents());
+
   const getTotalAmount = (eventId) => {
     // console.log("Getting total amount for event id :" + eventId);
     // console.log(entries);
@@ -79,19 +80,19 @@ export default function EventListNew() {
   };
 
   const deleteEvent = (id) => {
-    const eventArray = totalEvents.filter((singleEvent) => {
+    const eventArray = eventsList.filter((singleEvent) => {
       return singleEvent.id !== id;
     });
     console.log("deleteEvent: " + eventArray);
     setTotalEvents(eventArray);
-    // localStorage.setItem("eventsList", JSON.stringify(totalEvents));
-    // setEventsList(getDatafromEvent(id));
+    localStorage.setItem("eventsList", JSON.stringify(totalEvents));
+    setEventsList(getDatafromEvent(id));
   };
 
-  useEffect(() => {
-    localStorage.setItem("eventsList", JSON.stringify(totalEvents));
-    setEventsList(getDatafromEvent());
-  }, [totalEvents]);
+  // useEffect(() => {
+  //   localStorage.setItem("eventsList", JSON.stringify(totalEvents));
+  //   setEventsList(getDatafromEvent());
+  // }, [totalEvents]);
 
   return (
     <div className="event_container">
@@ -114,7 +115,7 @@ export default function EventListNew() {
                 >
                   <div className="event_head_name">
                     <h4>{event.name}</h4>
-                    <GrNewWindow onClick={navigateToEntryList} />
+                    <GrNewWindow onClick={navigateToEntryList(event.id)} />
                     <AiFillEdit onClick={() => editEvent(event.id)} />
                     <MdDelete onClick={() => deleteEvent(event.id)} />
                   </div>

@@ -61,7 +61,7 @@ export default function Event() {
   return (
     <div className="event_content">
       <form className="event_form" onSubmit={handleSubmitEvent}>
-        <h1 className="event-title">Add New Event</h1>
+        <h1 className="event-title">Edit Event</h1>
         <input
           className="event_inputs"
           type="text"
@@ -89,7 +89,7 @@ export default function Event() {
           value={date}
         />
         <button type="submit" className="event_button">
-          Add Event
+          Edit
         </button>
       </form>
     </div>
