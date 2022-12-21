@@ -449,3 +449,18 @@ padding: 10px;
     border-radius: 10px;
     height: 100px;
   }
+  .entry_searchbar{
+    padding: 10px;
+    display: flex;
+gap: 10px;
+    align-items: center;
+    border: 1px solid gray;
+    border-radius: 20px;
+    margin: 10px;
+  }
+  .entry_searchbar_input{
+    border: none;
+    outline: none;
+    width: 100%;
+    padding: 5px;
+  }

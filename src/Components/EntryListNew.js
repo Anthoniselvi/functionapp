@@ -50,7 +50,26 @@ export default function EntriesList() {
   const [totalEntries, setTotalEntries] = useState(getTotalDatafromEntry());
   const [eventsList, setEventsList] = useState(getDatafromEvent(eventId));
   const [entries, setEntries] = useState(getDatafromEntry(eventId));
+  // const [filteredName, setFilteredNames] = useState([]);
+  // const [searchName, setSearchName] = useState("");
 
+  function onChangeHandle(e) {
+    console.log("e.target.value", e.target.value);
+    if (e.target.value === "") {
+      window.location.reload(true);
+      const tempArr = entries;
+      setEntries(tempArr);
+      return;
+    }
+    const searchResult = entries.filter(
+      (entry) =>
+        entry.personName
+          .toLowerCase()
+          .startsWith(e.target.value.toLowerCase()) ||
+        entry.amount.toLowerCase().startsWith(e.target.value.toLowerCase())
+    );
+    setEntries(searchResult);
+  }
   const totalAmount = entries
     .map((entry) => entry.amount)
     .reduce((acc, value) => acc + +value, 0);
@@ -88,6 +107,16 @@ export default function EntriesList() {
     setEntries(getDatafromEntry(eventId));
   }, [totalEntries]);
 
+  // useEffect(() => {
+  //   const data = JSON.parse(localStorage.getItem("entries"));
+  //   data.get("entries").then((res) => setFilteredNames(res.data));
+  // }, []);
+
+  // {
+  //   NOTES.filter((note) => note.title.toLowerCase().includes(query)).map((note, index) => (
+  //     <div key={index}>{note.title}</div>
+  //   ))
+  // }
   return (
     <div className="entry_container">
       <div className="entry_header">
@@ -95,22 +124,58 @@ export default function EntriesList() {
           className="entry_header_icon"
           onClick={moveToEventListPage}
         />
-        <h1>Entry</h1>
+        {eventsList.map((eventId) => (
+          <h1 className="entry-title">{eventId.name}</h1>
+        ))}
+        {/* <h1>Entry</h1> */}
         <BsPersonCircle className="event_header_icon" />
       </div>
+
       <div className="entry_content">
+        <div className="entry_searchbar">
+          <BiSearch />
+          <input
+            type="text"
+            placeholder="Search by Person Name"
+            className="entry_searchbar_input"
+            // value={searchName}
+            onChange={onChangeHandle}
+          />
+        </div>
         {entries.length > 0 && (
           <>
             <div className="entry-inner-box">
               {/* onClick={moveToEntry} */}
               <div className="entry_head_name">
-                {eventsList.map((eventId) => (
+                {/* {eventsList.map((eventId) => (
                   <h1 className="entry-title">{eventId.name}</h1>
-                ))}
-                <div>
-                  <BiSearch />
-                  <p>Search by Person Name</p>
-                </div>
+                ))} */}
+
+                {/* <table style={{ border: "1px solid #000", marginLeft: "20px" }}>
+                  <tr style={{ border: "1px solid #000" }}>
+                    <th>Person Name</th>
+                    <th>Amount</th>
+                    <th>Gift</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                  </tr>
+
+                  {entries.map((item) => {
+                    return (
+                      <tr>
+                        <td style={{ border: "1px solid #000" }}>
+                          {item.personName}
+                        </td>
+                        <td style={{ border: "1px solid #000" }}>
+                          {item.amount}
+                        </td>
+                        <td style={{ border: "1px solid #000" }}>
+                          {item.gift}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </table> */}
                 <table className="entry-table">
                   <tr>
                     <th>Person Name</th>
