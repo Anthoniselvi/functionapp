@@ -63,7 +63,7 @@ function Signin() {
           <AiOutlineArrowLeft onClick={moveToFrontPage} />
           <p className="signin_top_head">Login</p>
         </div>
-        <h1>Sign In</h1>
+        <h1 className="signin_title">Sign In</h1>
         <p className="signin_para">
           Lorem ipsum dolor sit, amet consectetur adipisicing elit.
         </p>
@@ -87,9 +87,11 @@ function Signin() {
           value={signinData.password}
         />
         {errors.password && <p className="error">{errors.password}</p>}
-        <a href="" className="sigin_forget">
-          <p className="signin_forget_para">Forget Password?</p>
-        </a>
+        <div className="signin_forget_para">
+          <a href="" className="sigin_forget">
+            <p>Forget Password?</p>
+          </a>
+        </div>
         <button className="signin_sign_button">Sign In</button>
       </form>
       <div className="social-login">

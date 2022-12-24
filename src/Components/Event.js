@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { AiOutlineArrowLeft, AiOutlineLogout } from "react-icons/ai";
 
 const getDatafromEvent = () => {
   const data = localStorage.getItem("eventsList");
@@ -15,7 +16,7 @@ const getDataforSingleEvent = (eventId) => {
   // console.log("getdatafor Single event:" + data);
   if (data) {
     return JSON.parse(data).filter((event) => {
-      return parseInt(event.id) === parseInt(eventId);
+      return event.id === eventId;
     })[0];
   } else {
     return {};
@@ -45,7 +46,7 @@ export default function Event() {
     console.log(newEdit);
 
     const updatedEventsList = eventsList.map((singleEvent) => {
-      if (parseInt(singleEvent.id) === parseInt(eventId)) {
+      if (singleEvent.id === eventId) {
         return newEdit;
       } else {
         return singleEvent;
@@ -58,10 +59,24 @@ export default function Event() {
 
     navigate("/eventslist");
   };
+
+  const moveToFrontPage = () => {
+    navigate("/eventslist");
+  };
+
   return (
     <div className="event_content">
+      <div className="event_header">
+        <AiOutlineArrowLeft
+          className="event_header_icon"
+          onClick={moveToFrontPage}
+        />
+        <h1>Edit Event</h1>
+        {/* <BsPersonCircle className="event_header_icon" /> */}
+        <AiOutlineLogout className="event_header_icon" />
+      </div>
       <form className="event_form" onSubmit={handleSubmitEvent}>
-        <h1 className="event-title">Edit Event</h1>
+        {/* <h1 className="event-title">Edit Event</h1> */}
         <input
           className="event_inputs"
           type="text"
@@ -88,7 +103,7 @@ export default function Event() {
           onChange={(e) => setDate(e.target.value)}
           value={date}
         />
-        <button type="submit" className="event_button">
+        <button type="submit" className="event_edit_button">
           Edit
         </button>
       </form>

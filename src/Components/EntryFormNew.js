@@ -9,6 +9,7 @@ import { MdDelete } from "react-icons/md";
 import { BiMenu } from "react-icons/bi";
 import { AiFillHome } from "react-icons/ai";
 import { GrAddCircle } from "react-icons/gr";
+import { v4 as uuidv4 } from "uuid";
 
 const getTotalDatafromEntry = () => {
   const data = localStorage.getItem("entries");
@@ -29,8 +30,8 @@ export default function EntryFormNew() {
   const [totalEntries, setTotalEntries] = useState(getTotalDatafromEntry());
   const [personName, setPersonName] = useState("");
   const [city, setCity] = useState("");
-  const [amount, setAmount] = useState(0);
-  const [gift, setGift] = useState(0);
+  const [amount, setAmount] = useState("");
+  const [gift, setGift] = useState("");
   const [selected, setSelected] = useState("amount");
 
   const handleSubmitEntry = (e) => {
@@ -38,7 +39,7 @@ export default function EntryFormNew() {
     console.log(eventId);
     e.preventDefault();
     let newEntry = {
-      id: totalEntries.length + 1,
+      id: uuidv4(),
       personName,
       city,
       amount,
@@ -139,7 +140,7 @@ export default function EntryFormNew() {
               </div>
               {selected === "gift" && (
                 <>
-                  <input
+                  {/* <input
                     className="entry_inputs"
                     type="number"
                     required
@@ -147,10 +148,13 @@ export default function EntryFormNew() {
                     onChange={(e) => setGift(e.target.value)}
                     value={gift}
                     placeholder="No. of Gift"
+                  /> */}
+                  <textarea
+                    className="entry_form_comments "
+                    onChange={(e) => setGift(e.target.value)}
+                    value={gift}
+                    placeholder="Type comments if any"
                   />
-                  <textarea className="entry_form_comments ">
-                    Type comments if any
-                  </textarea>
                 </>
               )}
             </div>

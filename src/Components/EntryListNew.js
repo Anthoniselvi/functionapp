@@ -9,12 +9,13 @@ import { MdDelete } from "react-icons/md";
 import { BiMenu } from "react-icons/bi";
 import { AiFillHome } from "react-icons/ai";
 import { GrAddCircle } from "react-icons/gr";
+import Avatar from "react-avatar";
 
 const getDatafromEvent = (eventId) => {
   const data = localStorage.getItem("eventsList");
   if (data) {
     return JSON.parse(data).filter((event) => {
-      return parseInt(event.id) === parseInt(eventId);
+      return event.id === eventId;
     });
   } else {
     return [];
@@ -23,10 +24,10 @@ const getDatafromEvent = (eventId) => {
 
 const getDatafromEntry = (eventId) => {
   const data = localStorage.getItem("entries");
-  // console.log("from data", data);
+  console.log("from data", data);
   if (data) {
     return JSON.parse(data).filter((entry) => {
-      return parseInt(entry.eventId) === parseInt(eventId);
+      return entry.eventId === eventId;
     });
   } else {
     return [];
@@ -61,12 +62,8 @@ export default function EntriesList() {
       setEntries(tempArr);
       return;
     }
-    const searchResult = entries.filter(
-      (entry) =>
-        entry.personName
-          .toLowerCase()
-          .startsWith(e.target.value.toLowerCase()) ||
-        entry.amount.toLowerCase().startsWith(e.target.value.toLowerCase())
+    const searchResult = entries.filter((entry) =>
+      entry.personName.toLowerCase().includes(e.target.value.toLowerCase())
     );
     setEntries(searchResult);
   }
@@ -75,9 +72,7 @@ export default function EntriesList() {
     .reduce((acc, value) => acc + +value, 0);
   // console.log(totalAmount);
 
-  const totalGift = entries
-    .map((entry) => entry.gift)
-    .reduce((acc, value) => acc + +value, 0);
+  const totalGift = entries.filter((entry) => entry.gift !== "").length;
   // console.log(totalGift);
 
   const navigateToEntryForm = () => {
@@ -147,35 +142,6 @@ export default function EntriesList() {
             <div className="entry-inner-box">
               {/* onClick={moveToEntry} */}
               <div className="entry_head_name">
-                {/* {eventsList.map((eventId) => (
-                  <h1 className="entry-title">{eventId.name}</h1>
-                ))} */}
-
-                {/* <table style={{ border: "1px solid #000", marginLeft: "20px" }}>
-                  <tr style={{ border: "1px solid #000" }}>
-                    <th>Person Name</th>
-                    <th>Amount</th>
-                    <th>Gift</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                  </tr>
-
-                  {entries.map((item) => {
-                    return (
-                      <tr>
-                        <td style={{ border: "1px solid #000" }}>
-                          {item.personName}
-                        </td>
-                        <td style={{ border: "1px solid #000" }}>
-                          {item.amount}
-                        </td>
-                        <td style={{ border: "1px solid #000" }}>
-                          {item.gift}
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </table> */}
                 <table className="entry-table">
                   <tr>
                     <th>Person Name</th>
@@ -186,7 +152,15 @@ export default function EntriesList() {
                   </tr>
                   {entries.map((entry) => (
                     <tr key={entry}>
-                      <td>{entry.personName}</td>
+                      <td>
+                        <Avatar
+                          name={entry.personName}
+                          size="35"
+                          round={true}
+                          maxInitials="1"
+                        />
+                        {entry.personName}
+                      </td>
                       <td>{entry.amount}</td>
                       <td>{entry.gift}</td>
                       <td>

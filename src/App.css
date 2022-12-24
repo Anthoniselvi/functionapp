@@ -11,3 +11,8 @@
   border-radius: 20px;
   overflow: hidden;
 }
+@media (max-width:375px) {
+  .container{
+  margin: 2vh;
+}
+}

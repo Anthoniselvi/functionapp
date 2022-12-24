@@ -7,6 +7,7 @@ import { BiMenu } from "react-icons/bi";
 import { AiFillHome } from "react-icons/ai";
 import { GrAddCircle } from "react-icons/gr";
 import { TextRotateUp } from "@mui/icons-material";
+import { v4 as uuidv4 } from "uuid";
 
 const getDatafromEvent = () => {
   const data = localStorage.getItem("eventsList");
@@ -28,7 +29,8 @@ export default function EventFormNew() {
   const handleSubmitEvent = (e) => {
     e.preventDefault();
     let newEvent = {
-      id: eventsList.length + 1,
+      // id: eventsList.length + 1,
+      id: uuidv4(),
       name,
       place,
       date,
@@ -49,12 +51,15 @@ export default function EventFormNew() {
     navigate("/event/new");
   };
 
+  const moveToFrontPage = () => {
+    navigate("/eventslist");
+  };
   return (
     <div className="event_container">
       <div className="event_header">
         <AiOutlineArrowLeft
           className="event_header_icon"
-          // onClick={moveToFrontPage}
+          onClick={moveToFrontPage}
         />
         <h1>Events</h1>
         <BsPersonCircle className="event_header_icon" />

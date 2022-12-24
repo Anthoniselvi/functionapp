@@ -7,7 +7,7 @@ import { useSearchParams } from "react-router-dom";
 
 const getDataforSingleEntry = (entryId) => {
   const data = localStorage.getItem("entries");
-  // console.log("getdatafor Single entry:" + data);
+  console.log("getdatafor Single entry:" + data);
   if (data) {
     return JSON.parse(data).filter((entry) => {
       return parseInt(entry.id) === parseInt(entryId);
@@ -38,6 +38,7 @@ function Edit() {
   const [city, setCity] = useState(editEntry.city);
   const [amount, setAmount] = useState(editEntry.amount);
   const [gift, setGift] = useState(editEntry.gift);
+  const [selected, setSelected] = useState("amount");
 
   const handleSubmitEditEntry = (e) => {
     e.preventDefault();
@@ -95,22 +96,65 @@ function Edit() {
             value={city}
             placeholder="City Name"
           />
-          <input
-            className="entry_inputs"
-            type="number"
-            required
-            name="amount"
-            onChange={(e) => setAmount(e.target.value)}
-            value={amount}
-          />
-          <input
-            className="entry_inputs"
-            type="number"
-            required
-            name="gift"
-            onChange={(e) => setGift(e.target.value)}
-            value={gift}
-          />
+          <div className="entry_radio_container">
+            <label>Type of Presentation: </label>
+            <div className="entry_radio_inputs">
+              <div className="row">
+                <input
+                  className=""
+                  name="radio"
+                  type="radio"
+                  value="amount"
+                  defaultChecked={selected === "amount"}
+                  onChange={(e) => setSelected(e.target.value)}
+                />
+
+                <label htmlFor="amount">Amount</label>
+              </div>
+              {/* {selected === "amount" && ( */}
+              <input
+                className="entry_inputs"
+                type="number"
+                required
+                name="amount"
+                onChange={(e) => setAmount(e.target.value)}
+                value={amount}
+                placeholder="Amount"
+              />
+              {/* )} */}
+            </div>
+            <div className="entry_radio_inputs">
+              <div className="row">
+                <input
+                  name="radio"
+                  type="radio"
+                  value="gift"
+                  defaultChecked={selected === "gift"}
+                  onChange={(e) => setSelected(e.target.value)}
+                />
+                <label htmlFor="gift">No. of Gift</label>
+              </div>
+              {selected === "gift" && (
+                <>
+                  {/* <input
+                    className="entry_inputs"
+                    type="number"
+                    required
+                    name="gift"
+                    onChange={(e) => setGift(e.target.value)}
+                    value={gift}
+                    placeholder="No. of Gift"
+                  /> */}
+                  <textarea
+                    className="entry_form_comments "
+                    onChange={(e) => setGift(e.target.value)}
+                    value={gift}
+                    placeholder="Type comments if any"
+                  />
+                </>
+              )}
+            </div>
+          </div>
           <button className="entry_button" type="submit">
             Edit
           </button>
